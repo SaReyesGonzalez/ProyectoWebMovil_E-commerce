@@ -1,0 +1,14 @@
+{
+  "name": "webmovil-ecommerce-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run start:dev --prefix backend\"",
+    "start": "npm run dev",
+    "build": "concurrently \"npm run build --prefix frontend\" \"npm run build --prefix backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
