@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tienda {
+    id     Int     @id @default(autoincrement())
+    locatarioId    Int @unique
+    nombre    String  @db.VarChar(255)
+    ubicacion   String  @db.VarChar(255)
+    calificacion    Float?
+
+    productos Producto[]
+    stocks Stock[]
+    proveedores    Proveedor[]
+}
+
+model Producto {
+    id     Int     @id @default(autoincrement())
+    tiendaId   Int     
+    nombre    String  @db.VarChar(255)
+    precio    Int   
+    esVegetariano   Boolean  @default(false)   
+    esCeliaco   Boolean     @default(false)
+    esVegano    Boolean     @default(false)
+    cant_calorias   Int     
+
+    tienda      Tienda      @relation(fields: [tiendaId], references: [id])
+    stocks         Stock[]
+}
+
+model Stock {
+    id     Int     @id @default(autoincrement())
+    productoId    Int 
+    tiendaId     Int
+    cant_producto    Int    @default(0)
+
+    producto      Producto      @relation(fields: [productoId], references: [id])   
+    tienda      Tienda      @relation(fields: [tiendaId], references: [id])
+}
+
+model Proveedor {
+    id     Int     @id @default(autoincrement())
+    proveedorId Int 
+    tiendaId    Int
+
+    tienda      Tienda      @relation(fields: [tiendaId], references: [id])
+}
