@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -7,8 +8,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Repartidores {
-    id     Int     @id @default(autoincrement())
-    userId      Int     @unique     //id del usuario al que referencia este Repartidores
-    calificacion    Float?
+model Repartidor {
+  id     Int     @id @default(autoincrement())
+  userId      Int     @unique     //id del usuario al que referencia este Repartidores
+  calificacion    Float?
 }
