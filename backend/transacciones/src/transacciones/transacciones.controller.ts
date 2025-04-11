@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { TransaccionesService } from './transacciones.service';
 
 @Controller('transacciones')
-export class TransaccionesController {}
+export class TransaccionesController {
+    constructor(private readonly transaccionesService: TransaccionesService){}
+
+    @Get()
+    getAll() {
+        return this.transaccionesService.findAll();
+    }
+}

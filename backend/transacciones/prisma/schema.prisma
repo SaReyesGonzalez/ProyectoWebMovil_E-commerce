@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/@prisma/client"
 }
 
 datasource db {
@@ -17,7 +16,7 @@ model Transaccion {
   fechaCreacion DateTime  @default(now())
   pedidoId    Int @unique
 
-  pedido Pedido?
+  pedido Pedido? @relation("TransaccionPedido")
 }
 
 model Pedido {
@@ -26,5 +25,6 @@ model Pedido {
   productoID Int 
   cantidad Int
 
-  transaccion     Transaccion     @relation(fields: [transaccionId], references: [id])
+  transaccion     Transaccion     @relation("TransaccionPedido", fields: [transaccionId], references: [id])
+
 }
