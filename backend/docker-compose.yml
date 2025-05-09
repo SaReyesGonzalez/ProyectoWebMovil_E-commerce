@@ -1,0 +1,133 @@
+version: '3.9'
+
+services:
+  postgres_usuarios:
+    image: postgres:17
+    container_name: postgres_usuarios
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: usuarios
+    ports:
+      - "5433:5432"
+    volumes:
+      - dbdata_usuarios:/var/lib/postgresql/data
+  postgres_transacciones:
+    image: postgres:17
+    container_name: postgres_transacciones
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: transacciones
+    ports:
+      - "5434:5432"
+    volumes:
+    - dbdata_transacciones:/var/lib/postgresql/data
+  postgres_proveedores:
+    image: postgres:17
+    container_name: postgres_proveedores
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: proveedores
+    ports:
+      - "5435:5432" 
+    volumes:
+    - dbdata_proveedores:/var/lib/postgresql/data
+  postgres_delivery:
+    image: postgres:17
+    container_name: postgres_delivery
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: delivery
+    ports:
+      - "5436:5432"
+    volumes:
+    - dbdata_delivery:/var/lib/postgresql/data
+  postgres_catalogos:
+    image: postgres:17
+    container_name: postgres_catalogos
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: catalogos
+    ports:
+      - "5437:5432"
+    volumes:
+      - dbdata_catalogos:/var/lib/postgresql/data
+  usuarios:
+    container_name: servicio_usuarios
+    build: ./usuarios
+    env_file: 
+      - ./usuarios/.env
+    ports:
+      - "3004:3000"
+    depends_on:
+      - postgres_usuarios
+    networks:
+      - backend-ecommerce  
+  transacciones:
+    container_name: servicio_transacciones
+    build: ./transacciones
+    env_file: 
+      - ./transacciones/.env
+    ports:
+      - "3003:3000"
+    depends_on:
+      - postgres_transacciones
+    networks:
+      - backend-ecommerce 
+  proveedores:
+    container_name: servicio_proveedores
+    build: ./proveedores
+    env_file: 
+      - ./proveedores/.env
+    ports:
+      - "3002:3000"
+    depends_on:
+      - postgres_proveedores
+    networks:
+      - backend-ecommerce 
+  delivery:
+    container_name: servicio_delivery
+    build: ./delivery
+    env_file: 
+      - ./delivery/.env
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres_delivery
+    networks:
+      - backend-ecommerce 
+  catalogos:
+    container_name: servicio_catalogos
+    build: ./catalogos
+    env_file: 
+      - ./catalogos/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres_catalogos
+    networks:
+      - backend-ecommerce 
+
+networks:
+  backend-ecommerce:
+volumes:
+  dbdata_usuarios:
+  dbdata_transacciones:
+  dbdata_proveedores:
+  dbdata_delivery:
+  dbdata_catalogos:
+
