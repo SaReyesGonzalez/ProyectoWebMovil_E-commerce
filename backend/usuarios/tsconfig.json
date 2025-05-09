@@ -16,6 +16,8 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "strictBindCallApply": true,
+    "strict": true,
     "noFallthroughCasesInSwitch": true
-  }
+  },
+  "include": ["src", "node_modules/@prisma/client"]
 }
