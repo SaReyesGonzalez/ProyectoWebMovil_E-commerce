@@ -14,6 +14,8 @@ services:
       - "5433:5432"
     volumes:
       - dbdata_usuarios:/var/lib/postgresql/data
+    networks:
+      - backend-ecommerce  
   postgres_transacciones:
     image: postgres:17
     container_name: postgres_transacciones
@@ -27,6 +29,8 @@ services:
       - "5434:5432"
     volumes:
     - dbdata_transacciones:/var/lib/postgresql/data
+    networks:
+      - backend-ecommerce  
   postgres_proveedores:
     image: postgres:17
     container_name: postgres_proveedores
@@ -40,6 +44,8 @@ services:
       - "5435:5432" 
     volumes:
     - dbdata_proveedores:/var/lib/postgresql/data
+    networks:
+      - backend-ecommerce  
   postgres_delivery:
     image: postgres:17
     container_name: postgres_delivery
@@ -53,6 +59,8 @@ services:
       - "5436:5432"
     volumes:
     - dbdata_delivery:/var/lib/postgresql/data
+    networks:
+      - backend-ecommerce  
   postgres_catalogos:
     image: postgres:17
     container_name: postgres_catalogos
@@ -66,6 +74,8 @@ services:
       - "5437:5432"
     volumes:
       - dbdata_catalogos:/var/lib/postgresql/data
+    networks:
+      - backend-ecommerce  
   usuarios:
     container_name: servicio_usuarios
     build: ./usuarios
