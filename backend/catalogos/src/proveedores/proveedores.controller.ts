@@ -13,23 +13,23 @@ import { Proveedor } from '@prisma/client';
 
 @Controller('catalogos/proveedores')
 export class ProveedoresController {
-  constructor(private readonly usuariosService: ProveedoresService) {}
+  constructor(private readonly proveedoresService: ProveedoresService) {}
 
   @Get()
   async getAll(): Promise<Proveedor[]> {
-    return this.usuariosService.findAll();
+    return this.proveedoresService.findAll();
   }
 
   @Get(':id')
   async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Proveedor | null> {
-    return this.usuariosService.findById(id);
+    return this.proveedoresService.findById(id);
   }
 
   @Post()
   async create(@Body() data: Proveedor): Promise<Proveedor> {
-    return this.usuariosService.create(data);
+    return this.proveedoresService.create(data);
   }
 
   @Put(':id')
@@ -37,11 +37,11 @@ export class ProveedoresController {
     @Param('id', ParseIntPipe) id: number,
     @Body() data: Partial<Proveedor>,
   ): Promise<Proveedor> {
-    return this.usuariosService.update(id, data);
+    return this.proveedoresService.update(id, data);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number): Promise<Proveedor> {
-    return this.usuariosService.delete(id);
+    return this.proveedoresService.delete(id);
   }
 }

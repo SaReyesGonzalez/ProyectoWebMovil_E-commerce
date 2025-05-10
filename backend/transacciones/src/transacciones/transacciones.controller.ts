@@ -16,7 +16,7 @@ export class TransaccionesController {
   constructor(private readonly transaccionesService: TransaccionesService) {}
 
   @Get()
-  getAll(): Promise<Transaccion[]> {
+  async getAll(): Promise<Transaccion[]> {
     return this.transaccionesService.findAll();
   }
 

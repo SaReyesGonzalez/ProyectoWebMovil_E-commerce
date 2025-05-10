@@ -16,14 +16,13 @@ export class DeliveryController {
   constructor(private readonly deliveryService: DeliveryService) {}
 
   @Get()
-  getAll(): Promise<Repartidor[]> {
+  async getAll(): Promise<Repartidor[]> {
     return this.deliveryService.findAll();
   }
 
   @Get(':id')
   async getById(
     @Param('id', ParseIntPipe) id: number,
-    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   ): Promise<Repartidor | null> {
     return this.deliveryService.findById(id);
   }

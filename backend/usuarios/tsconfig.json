@@ -24,4 +24,3 @@
   },
   "include": ["src", "node_modules/@prisma/client"]
 }
-

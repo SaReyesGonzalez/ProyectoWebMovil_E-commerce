@@ -16,7 +16,7 @@ export class ProveedoresController {
   constructor(private readonly proveedoresService: ProveedoresService) {}
 
   @Get()
-  getAll(): Promise<Proveedor[]> {
+  async getAll(): Promise<Proveedor[]> {
     return this.proveedoresService.findAll();
   }
 
