@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../../styles/globals.css";
+
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/app/seccion-comprador/components/AppSidebar";
+
+import { CircleUserRound, ShoppingCart, Funnel } from 'lucide-react';
+import SearchBar from "./seccion-comprador/components/SearchBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,16 +25,44 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md p-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-blue-600">Kiosko de Ross</h1>
+          <div className="fixed right-20 flex items-right space-x-6 ">
+            <a href="/Login" className="p-2 border rounded-md bg-white text-white hover:bg-blue-300">
+              <CircleUserRound color="#9CA3AF" strokeWidth={2} />
+            </a>
+            <a href="/Carrito" className="p-2 border rounded-md bg-white-200 text-white hover:bg-blue-300">
+              <ShoppingCart color="#9CA3AF" strokeWidth={2} />
+            </a>
+            
+          </div>
+        </header>
+
+        <div className="flex pt-16 min-h-screen bg-gray-100">
+          <aside className="hidden md:block w-64 bg-white shadow-md p-4">
+            <SidebarProvider>
+              <AppSidebar />
+            </SidebarProvider>
+          </aside>
+          <main className="flex-grow px-6 py-6 bg-gray-50">
+            <div className="flex items-center w-full max-w-4xl mx-auto px-4 gap-4">
+              <SearchBar/>
+              <a className="p-2 border rounded-md bg-gray-200 text-white hover:bg-blue-300">
+                <Funnel color="#9CA3AF" strokeWidth={2} />
+              </a>
+            </div>
+            
+            {children}
+          </main>
+        </div>
+        
       </body>
     </html>
-  );
+  )
 }

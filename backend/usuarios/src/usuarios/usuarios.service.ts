@@ -3,9 +3,9 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UsuariosService {
-    constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
-    async findAll() {
-        return this.prisma.usuario.findMany();
-    }
+  async findAll() {
+    return this.prisma.usuario.findMany();
+  }
 }
