@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Proveedores {
+model Proveedor {
     id     Int     @id @default(autoincrement())
     rut     String      @unique
     nombre    String  @db.VarChar(255)
