@@ -1,8 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3003);
+  const app = await NestFactory.createMicroservice(AppModule, {
+    transport: Transport.TCP,
+    options: {
+      host: 'localhost',
+      port: 3004,
+    },
+  });
+  await app.listen();
+  console.log('Microservicio Transacciones corriendo en puerto 3004');
 }
 bootstrap();
