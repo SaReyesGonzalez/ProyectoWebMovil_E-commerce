@@ -5,8 +5,9 @@ import "../../styles/globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/app/seccion-comprador/components/AppSidebar";
 
-import { CircleUserRound, ShoppingCart, Funnel } from 'lucide-react';
+import { CircleUserRound, ShoppingCart } from 'lucide-react';
 import SearchBar from "./seccion-comprador/components/SearchBar";
+import { Filter } from "./seccion-comprador/components/Filter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,15 +54,12 @@ export default function RootLayout({
           <main className="flex-grow px-6 py-6 bg-gray-50">
             <div className="flex items-center w-full max-w-4xl mx-auto px-4 gap-4">
               <SearchBar/>
-              <a className="p-2 border rounded-md bg-gray-200 text-white hover:bg-blue-300">
-                <Funnel color="#9CA3AF" strokeWidth={2} />
-              </a>
+              <Filter/>
             </div>
             
             {children}
           </main>
         </div>
-        
       </body>
     </html>
   )
